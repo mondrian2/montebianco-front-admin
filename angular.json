@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "plataforma": {
+    "admin-plataforma": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/plataforma",
+            "outputPath": "dist/admin-plataforma",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,9 +28,14 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -65,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "plataforma:build"
+            "browserTarget": "admin-plataforma:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "plataforma:build:production"
+              "browserTarget": "admin-plataforma:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "plataforma:build"
+            "browserTarget": "admin-plataforma:build"
           }
         },
         "test": {
@@ -113,16 +118,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "plataforma:serve"
+            "devServerTarget": "admin-plataforma:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "plataforma:serve:production"
+              "devServerTarget": "admin-plataforma:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "plataforma"
+  "defaultProject": "admin-plataforma",
+  "cli": {
+    "analytics": false
+  }
 }

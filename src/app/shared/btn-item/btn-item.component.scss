@@ -1,0 +1,15 @@
+.numero {
+    border-radius: 50%;
+    border: solid thin  #3A90FA;;
+    width: 65px;
+    height: 65px;
+    color:  #3A90FA;;
+    text-align: center;
+    padding-top: 7px;
+    font-size: 2em;
+    font-family: 'Montserrat', sans-serif;
+}
+.numero:hover {
+    background-color: #3A90FA;
+    color: white;
+}
