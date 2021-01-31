@@ -1,5 +1,7 @@
+import { ExercicioService } from './../../services/exercicio.service';
 import { Exercicio } from './../../models/exercicio';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-exercicios',
@@ -15,7 +17,7 @@ export class ExerciciosComponent implements OnInit {
   exercicio: Exercicio;
 
 
-  constructor() { 
+  constructor(private router: Router, private srv: ExercicioService) { 
     this.exercicio = new Exercicio;
   }
 
@@ -27,6 +29,18 @@ export class ExerciciosComponent implements OnInit {
 
     this.exercicio.comando = "Completate le frasi con gli articoli determinativi e il verbo essere.";
     this.exercicio.id = 1;
+  }
+
+  goCreate() {
+    this.router.navigate(["/exercicio-add"])
+  }
+
+  update(id: number, data: Exercicio){
+    this.srv.update(id, data);
+  }
+
+  delete(id: number){
+    this.srv.delete(id);
   }
 
 }
