@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,7 +30,6 @@ import { ItemEditComponent } from './pages/item-edit/item-edit.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CardItemComponent } from './shared/card-item/card-item.component';
 import { CardExercicioComponent } from './shared/card-exercicio/card-exercicio.component';
-import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
