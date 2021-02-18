@@ -10,31 +10,31 @@ import { Observable } from 'rxjs';
 })
 
 export class ExerciciosComponent implements OnInit {
-  
+
   loading$: Observable<boolean>;
   exercicios$: Observable<Exercicio[]>;
- 
+
   constructor(private exercicioService: ExercicioService) {
     this.exercicios$ = exercicioService.entities$;
     this.loading$ = exercicioService.loading$;
   }
- 
+
   ngOnInit() {
-    this.getHeroes();
+    this.getExercicios();
   }
- 
+
   add(exercicio: Exercicio) {
     this.exercicioService.add(exercicio);
   }
- 
+
   delete(exercicio: Exercicio) {
     this.exercicioService.delete(exercicio.id);
   }
- 
-  getHeroes() {
+
+  getExercicios() {
     this.exercicioService.getAll();
   }
- 
+
   update(exercicio: Exercicio) {
     this.exercicioService.update(exercicio);
   }

@@ -10,33 +10,38 @@ import { Observable } from 'rxjs';
 })
 
 export class ItensComponent implements OnInit {
-  
+
   loading$: Observable<boolean>;
-  exercicioItens$: Observable<ExercicioItem[]>;
- 
+  exercicioItems$: Observable<ExercicioItem[]>;
+  iconCreate = 'iconCreate';
+
   constructor(private itemService: ItemService) {
-    this.exercicioItens$ = itemService.entities$;
+    this.exercicioItems$ = itemService.entities$;
     this.loading$ = itemService.loading$;
   }
- 
-  ngOnInit() {
-    this.getHeroes();
-  }
- 
-  add(exercicioItem: ExercicioItem) {
+
+  add(exercicioItem: ExercicioItem): void {
     this.itemService.add(exercicioItem);
   }
- 
-  delete(exercicioItem: ExercicioItem) {
+
+  delete(exercicioItem: ExercicioItem): void {
     this.itemService.delete(exercicioItem.id);
   }
- 
-  getHeroes() {
+
+  getItens(): void {
     this.itemService.getAll();
   }
- 
-  update(exercicioItem: ExercicioItem) {
+
+  update(exercicioItem: ExercicioItem): void {
     this.itemService.update(exercicioItem);
+  }
+
+  goCreate(): void {
+    console.log('goCreate');
+  }
+
+  ngOnInit(): void {
+    this.getItens();
   }
 
 }

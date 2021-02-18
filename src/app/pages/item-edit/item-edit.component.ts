@@ -5,6 +5,8 @@ import { Exercicio } from 'src/app/models/exercicio';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { ItemService } from 'src/app/services/item.service';
 
 
 
@@ -15,30 +17,41 @@ import { switchMap } from 'rxjs/operators';
 })
 export class ItemEditComponent implements OnInit {
 
-  msg: string
+  loading$: Observable<boolean>;
+  exercicioItems$: Observable<ExercicioItem[]>;
+
+  msg: string;
   name = '';
   frase = '';
   options: [];
   preview: string[] = [];
-  
   icon: string;
   exercicio: Exercicio;
   tipo: ExercicioTipo;
   item: ExercicioItem;
   form: FormGroup;
 
-  
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private itemService: ItemService) {
+
+    this.exercicioItems$ = itemService.entities$;
+    this.loading$ = itemService.loading$;
+
     this.form = this.formBuilder.group({
       website: this.formBuilder.array([], [Validators.required])
     });
-    this.exercicio = new Exercicio;
-    this.tipo = new ExercicioTipo;
-    this.item = new ExercicioItem;
+
+    // this.exercicio = new Exercicio;
+    // this.tipo = new ExercicioTipo;
+    // this.item = new ExercicioItem;
     this.item.opcoes = [];
    }
 
-   onCheckboxChange(e: any) {
+   getIten(id: number): void {
+    // this.itemService.getAll();
+    console.log(id);
+  }
+
+   onCheckboxChange(e: any): void {
     const website: FormArray = this.form.get('website') as FormArray;
     if (e.target.checked) {
       website.push(new FormControl(e.target.value));
@@ -48,11 +61,11 @@ export class ItemEditComponent implements OnInit {
     }
   }
 
-  optionsChanged($event: any) {
+  optionsChanged($event: any): void {
     this.options = $event.split(' ');
   }
 
-   setPreview() {
+   setPreview(): void {
     this.preview = [];
     console.log(this.options)
     this.options.forEach(op => {
@@ -65,8 +78,8 @@ export class ItemEditComponent implements OnInit {
     this.frase = this.preview.join(' ');
   }
 
-   submit() {
-  
+   submit(): void {
+
     this.setPreview();
     this.item.exercicio_id = 1;
     this.item.tipo_id = 1;
@@ -85,22 +98,21 @@ export class ItemEditComponent implements OnInit {
 
     console.log(this.route.snapshot.paramMap.get('id'))
 
+    // this.icon = 'send';
 
-    this.icon = 'send';
+    // this.exercicio.comando = "";
+    // this.exercicio.id = 1
 
-    this.exercicio.comando = "";
-    this.exercicio.id = 1
-    
-    this.tipo.id = 1;
-    this.tipo.tipo = "Completar";
+    // this.tipo.id = 1;
+    // this.tipo.tipo = "Completar";
 
-    this.item.exercicio_id = this.exercicio.id;
-    this.item.tipo_id = this.tipo.id;
-    this.item.item = 'complete le frase ';
-    this.name = this.item.item;
-    this.optionsChanged(this.item.item)
+    // this.item.exercicio_id = this.exercicio.id;
+    // this.item.tipo_id = this.tipo.id;
+    // this.item.item = 'complete le frase ';
+    // this.name = this.item.item;
+    // this.optionsChanged(this.item.item)
 
-    console.log(this.item)
+    // console.log(this.item)
   }
 
 }
