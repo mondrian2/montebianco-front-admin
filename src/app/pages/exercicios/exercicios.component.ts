@@ -1,46 +1,42 @@
 import { ExercicioService } from './../../services/exercicio.service';
 import { Exercicio } from './../../models/exercicio';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-exercicios',
-  templateUrl: './exercicios.component.html',
-  styleUrls: ['./exercicios.component.scss']
+  selector: 'app-itens',
+  templateUrl: './itens.component.html',
+  styleUrls: ['./itens.component.scss']
 })
+
 export class ExerciciosComponent implements OnInit {
-
-  iconCreate: string
-  iconDelete: string
-  iconEdit: string
-  iconSearch: string
-  exercicio: Exercicio;
-
-
-  constructor(private router: Router, private srv: ExercicioService) { 
-    this.exercicio = new Exercicio;
+  
+  loading$: Observable<boolean>;
+  exercicios$: Observable<Exercicio[]>;
+ 
+  constructor(private exercicioService: ExercicioService) {
+    this.exercicios$ = exercicioService.entities$;
+    this.loading$ = exercicioService.loading$;
   }
-
-  ngOnInit(): void {
-    this.iconCreate = 'add';
-    this.iconDelete = 'delete_forever';
-    this.iconEdit = 'create';
-    this.iconSearch = 'search';
-
-    this.exercicio.comando = "Completate le frasi con gli articoli determinativi e il verbo essere.";
-    this.exercicio.id = 1;
+ 
+  ngOnInit() {
+    this.getHeroes();
   }
-
-  goCreate() {
-    this.router.navigate(["/exercicio-add"])
+ 
+  add(exercicio: Exercicio) {
+    this.exercicioService.add(exercicio);
   }
-
-  update(id: number, data: Exercicio){
-    this.srv.update(id, data);
+ 
+  delete(exercicio: Exercicio) {
+    this.exercicioService.delete(exercicio.id);
   }
-
-  delete(id: number){
-    this.srv.delete(id);
+ 
+  getHeroes() {
+    this.exercicioService.getAll();
+  }
+ 
+  update(exercicio: Exercicio) {
+    this.exercicioService.update(exercicio);
   }
 
 }

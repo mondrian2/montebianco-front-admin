@@ -1,21 +1,47 @@
 <app-top [type] = 2></app-top>
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-md-5 offset-md-4">
-            <h1>Item-Edit</h1>
+<div class="item-add">
+    <section class="container">
+        <div class="row" *ngIf="msg">
+            <div class="col-md-8 offset-md-2">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{msg}}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 offset-md-4">
-            <form>
-                <div class="form-group">
-                    <label for="exampleFormControlFile1">item:</label>
-                    <input class="form-control" type="text" >
-                  </div>
-                <div class="form-group text-right">
-                    <app-btn [icon] = 'icon'></app-btn>
-                  </div>
-              </form>
+        <div class="row">
+            <div class="col-md-8 offset-md-2 mb-3">
+                <h2>Editar um Item</h2>
+            </div>
+            <div class="col-md-8 offset-md-2 mb-3">
+                <input [(ngModel)]="name" class="form-control"
+                    (ngModelChange)="optionsChanged($event)" #ctrl="ngModel" required>
+            </div>
+            <div class="col-md-8 offset-md-2">
+                <form [formGroup]="form" (ngSubmit)="submit()">
+                    <ul class="list-group" *ngIf="options">
+                        <li class="list-group-item active">Formar lacunas com:</li>
+                        <div class="form-group">
+                            <li class="list-group-item" *ngFor="let op of options">
+                                <label>
+                                    <input type="checkbox" [value]="op" (change)="onCheckboxChange($event)" />
+                                    {{op}}
+                                </label>
+                            </li>
+                        </div>
+                    
+                        <div class="col-md-12 card mb-5 text-center text-white pt-2 bg-info" *ngIf="frase">
+                            <small>Preview Exercício de Completar</small>
+                            <p>{{frase}}</p>
+                        </div>
+
+                        <button class="btn btn-primary col-md-6 offset-md-3" type="submit"
+                            [disabled]="!form.valid">Visualizar</button>
+                    </ul>
+                </form>
+            </div>
         </div>
-    </div>
+    </section>
 </div>

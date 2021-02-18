@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ExercicioItem } from './../../models/exercicio-item';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-card-item',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() exercicioItem: ExercicioItem;
+
+  item: string;
+  opcoes: string[];
+
+  constructor() { 
+    this.item = '';
+    this.opcoes = [];
+  }
 
   ngOnInit(): void {
+    this.item = this.exercicioItem.item;
+    this.opcoes= this.exercicioItem.opcoes;
   }
 
 }

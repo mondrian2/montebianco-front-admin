@@ -1,35 +1,42 @@
-import { ExercicioItem } from './../../models/exercicio-item';
 import { ItemService } from './../../services/item.service';
+import { ExercicioItem } from './../../models/exercicio-item';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-itens',
   templateUrl: './itens.component.html',
   styleUrls: ['./itens.component.scss']
 })
+
 export class ItensComponent implements OnInit {
-
-  exercicioItem: ExercicioItem;
-
-  constructor(private router: Router, private srv: ItemService) { 
-    this.exercicioItem = new ExercicioItem;
+  
+  loading$: Observable<boolean>;
+  exercicioItens$: Observable<ExercicioItem[]>;
+ 
+  constructor(private itemService: ItemService) {
+    this.exercicioItens$ = itemService.entities$;
+    this.loading$ = itemService.loading$;
   }
-
-  ngOnInit(): void {
+ 
+  ngOnInit() {
+    this.getHeroes();
   }
-
-  goCreate() {
-    this.router.navigate(["/item-add"])
+ 
+  add(exercicioItem: ExercicioItem) {
+    this.itemService.add(exercicioItem);
   }
-
-  update(id: number, data: ExercicioItem){
-    this.srv.update(id, data);
+ 
+  delete(exercicioItem: ExercicioItem) {
+    this.itemService.delete(exercicioItem.id);
   }
-
-  delete(id: number){
-    this.srv.delete(id);
+ 
+  getHeroes() {
+    this.itemService.getAll();
+  }
+ 
+  update(exercicioItem: ExercicioItem) {
+    this.itemService.update(exercicioItem);
   }
 
 }

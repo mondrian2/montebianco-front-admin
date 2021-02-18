@@ -30,6 +30,10 @@ import { ItemEditComponent } from './pages/item-edit/item-edit.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CardItemComponent } from './shared/card-item/card-item.component';
 import { CardExercicioComponent } from './shared/card-exercicio/card-exercicio.component';
+import { EntityDataModule } from '@ngrx/data';
+import { entityConfig } from 'entity-metadata';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 
 @NgModule({
@@ -66,8 +70,11 @@ import { CardExercicioComponent } from './shared/card-exercicio/card-exercicio.c
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-
+    HttpClientModule,
+    HttpClientModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    EntityDataModule.forRoot(entityConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

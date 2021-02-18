@@ -1,1 +1,22 @@
-<p>itens works!</p>
+<app-top [type] = 1></app-top>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-2 col-2  offset-md-3">
+            <app-btn (click) = "goCreate()" [icon] = 'iconCreate'></app-btn>
+        </div>
+        <div class="col-md-5">
+            <h1>Itens</h1>
+        </div>
+    </div>
+    <div class="row mt-5 mb-3">
+        <div class="col-md-4 offset-md-3">
+            <app-card-item [exercicioItem] = "exercicioItem"></app-card-item>
+        </div>
+        <div class="col-md-4 mt-2">
+            
+            <a [routerLink]="['/item-edit', exercicioItem.id]"><app-btn class="ml-2" [icon] = 'iconEdit'></app-btn></a>
+            <a routerLink="/item/{{exercicioItem.id}}"><app-btn class="ml-2" [icon] = 'iconSearch'></app-btn></a>
+            <app-btn  (click) = "delete(exercicioItem.id)" class="ml-2" [icon] = 'iconDelete'></app-btn>
+        </div>
+    </div>
+</div>

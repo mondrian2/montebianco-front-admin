@@ -54,7 +54,10 @@ export class ItemAddComponent implements OnInit {
 
   submit() {
     this.setPreview();
+    this.item.exercicio_id = 1;
+    this.item.tipo_id = 1;
     this.item.item = this.name;
+    this.item.opcoes = [];
     this.options.forEach(op => {
       if (this.form.value.website.indexOf(op) >= 0) {
         this.item.opcoes.push(op);
