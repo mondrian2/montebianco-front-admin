@@ -18,6 +18,7 @@ import { ItensComponent } from './pages/itens/itens.component';
 import { ItemAddComponent } from './pages/item-add/item-add.component';
 import { ItemEditComponent } from './pages/item-edit/item-edit.component';
 
+
 const routes: Routes = [
   {path: '', component: LoginComponent},
   {path: 'login', component: LoginComponent},
