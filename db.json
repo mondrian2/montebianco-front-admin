@@ -1,0 +1,19 @@
+﻿{
+    "exercicios":[{
+        "id": 1,
+        "comando": "...comando",
+        "itens":[
+            {
+                "id": 1,
+                "item": "...item",
+                "tipo": "complete",
+                "opcoes":[
+                    "opcao1",
+                    "opcao2",
+                    "opcao3",
+                    "opcao4"
+                ]
+            }
+        ]
+    }]
+}
